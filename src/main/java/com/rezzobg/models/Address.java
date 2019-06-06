@@ -20,6 +20,7 @@ public class Address {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     private String street;
+    private String area;
     private String city;
     private String country;
 }

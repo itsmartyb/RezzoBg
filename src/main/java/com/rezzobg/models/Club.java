@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.sql.Time;
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,8 +14,6 @@ import java.util.List;
 public class Club extends Place {
     private String genre;
 
-    @OneToMany(mappedBy = "club")
-    private List<Event> events;
     public Club(String name, Time startWorkingDay, Time endWorkingDay,
                       double rating, String description, int places, Address address, String genre) {
 

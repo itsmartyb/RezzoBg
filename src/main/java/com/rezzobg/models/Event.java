@@ -14,13 +14,8 @@ import java.time.LocalDate;
 public class Event extends Proposal{
     private String actorsName;
 
-    @ManyToOne
-    @JoinColumn(name = "club_id")
-    private Club club;
-
-    public Event(String pictureUrl, String description, String title, LocalDate date, String actorsName, Club club) {
-        super(1l, pictureUrl, description, title, date);
+    public Event(String pictureUrl, String description, String title, LocalDate date, String actorsName, Place place) {
+        super(1l, pictureUrl, description, title, date, place);
         this.actorsName = actorsName;
-        this.club = club;
     }
 }

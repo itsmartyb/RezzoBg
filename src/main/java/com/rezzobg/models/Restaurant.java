@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.sql.Time;
-import java.util.List;
 
 @Getter
 @Setter
@@ -14,9 +13,6 @@ import java.util.List;
 @Table(name = "restaurants")
 public class Restaurant extends Place {
     private String kitchen;
-
-    @OneToMany(mappedBy = "restaurant")
-    private List<Offer> offers;
 
     public Restaurant(String name, Time startWorkingDay, Time endWorkingDay,
                       double rating, String description, int places, Address address, String kitchen) {

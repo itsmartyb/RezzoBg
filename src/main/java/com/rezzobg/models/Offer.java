@@ -14,12 +14,9 @@ import java.time.LocalDate;
 @Table(name = "offers")
 public class Offer extends Proposal {
     private int price;
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
 
-    public Offer(Place place, String pictureUrl, String description, String title, LocalDate date, int price) {
-        super(1l, place, pictureUrl, description, title, date);
+    public Offer(String pictureUrl, String description, String title, LocalDate date, int price, Place place) {
+        super(1l, pictureUrl, description, title, date, place);
         this.price = price;
     }
 }

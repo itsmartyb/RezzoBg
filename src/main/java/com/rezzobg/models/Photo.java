@@ -4,27 +4,23 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.*;
-import java.sql.Time;
+import org.springframework.stereotype.Service;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "bookings")
-public class Booking {
+@Table(name = "photos")
+public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-    private int places;
-    private int discount;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    private Time startTime;
+    private String url;
     @ManyToOne
     @JoinColumn(name = "place_id")
-    private Place place;
+    Place place;
 }

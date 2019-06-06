@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Getter
@@ -22,18 +22,21 @@ public class SignUpDTO {
     private String password;
     @NotBlank(message = "First name is not long enough")
     private String firstName;
-    @NotBlank(message = "Last name is not long enough")
-    private String lastname;
-    @Pattern(regexp = "^\\+[0-9]{1,3}\\.[0-9]{4,14}(?:x.+)?$", message = "Telephone isn't standard for EU")
+    @Size(max = 20, min = 3, message = "{user.name.invalid}")
+    @NotEmpty(message = "Last name is not long enough")
+    private String lastName;
+    //@Pattern(regexp = "^\\+[0-9]{1,3}\\.[0-9]{4,14}(?:x.+)?$", message = "Telephone isn't standard for EU")
     @NotBlank(message = "Telephone is not long enough")
     private String telephone;
     @NotBlank(message = "Street is not long enough")
     private String street;
+    @NotBlank(message = "Area is not long enough")
+    private String area;
     @NotBlank(message = "City is not long enough")
     private String city;
     @NotBlank(message = "Country is not long enough")
     private String country;
-    @NotBlank(message = "Date of birth is not long enough")
-    @Pattern(regexp = "^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$")
+    @NotNull(message = "")
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
     private LocalDate dateOfBirth;
 }
