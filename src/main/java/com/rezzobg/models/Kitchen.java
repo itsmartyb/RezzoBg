@@ -16,8 +16,8 @@ public class Kitchen extends Characteristic {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    public Kitchen(Long id, String name) {
-        super(id, name);
+    public Kitchen(String name) {
+        super(1l, name);
     }
 
 }
