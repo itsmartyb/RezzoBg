@@ -2,22 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4e9c56a-cc94-4cec-9cf9-e5f9676afc10" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Genre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Kitchen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Kitchen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Photo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Place.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Proposal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Proposal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Theatre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/Theatre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/repositories/AddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/repositories/AddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/repositories/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/repositories/EventRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/repositories/PlaceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/repositories/PlaceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/services/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/services/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/services/Encoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/services/Encoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/services/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/services/EventService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rezzobg/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rezzobg/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Comment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Genre.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Genre.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Kitchen.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Kitchen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Photo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Photo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Place.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Place.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Proposal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Proposal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Theatre.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/models/Theatre.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/services/AddressService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/services/AddressService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/services/EventService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/services/EventService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/rezzobg/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/rezzobg/services/UserService.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -80,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/rezzobg/models/Club.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+            <state relative-caret-position="136">
+              <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -346,7 +340,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25586355" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25586355" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -355,7 +349,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32827735" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -596,8 +590,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rezzobg/models/Club.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        <state relative-caret-position="136">
+          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
