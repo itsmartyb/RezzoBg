@@ -16,7 +16,6 @@ public class EventService {
     private EventRepository eventRepository;
 
     public List<EventDtoForList> getAllEvents() {
-        //List<Event> events;
         List<Event> events = eventRepository.findAll();
         return events.stream().map(event -> new EventDtoForList(event.getTitle(), event.getPictureUrl(), event.getActorsName()))
                 .collect(Collectors.toList());

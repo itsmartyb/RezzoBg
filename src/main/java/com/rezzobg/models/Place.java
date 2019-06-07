@@ -10,13 +10,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-@Entity
 @Table(name = "places")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@Entity
 public class Place {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +44,6 @@ public class Place {
     List<Comment> comments;
     @OneToMany(mappedBy = "place")
     List<Photo> photos;
-    @OneToMany(mappedBy = "place")
-    List<Booking> bookings;
 
     public Place(Long id, String name, Time startWorkingDay, Time endWorkingDay, double rating, String description, int places, Address address) {
         this.id = id;
@@ -59,6 +57,5 @@ public class Place {
         this.proposals = new LinkedList<>();
         this.comments = new LinkedList<>();
         this.photos = new LinkedList<>();
-        this.bookings = new LinkedList<>();
     }
 }
