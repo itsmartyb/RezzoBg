@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Place {
+public class Place {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

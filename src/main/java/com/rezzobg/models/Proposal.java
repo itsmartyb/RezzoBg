@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "proposals")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Proposal {
+public class Proposal {
 
 
     @Id
