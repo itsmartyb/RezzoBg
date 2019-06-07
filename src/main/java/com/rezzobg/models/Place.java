@@ -48,6 +48,7 @@ public class Place {
     public Place(Long id, String name, Time startWorkingDay, Time endWorkingDay, double rating, String description, int places, Address address) {
         this.id = id;
         this.name = name;
+        //Samo Liverpooollll
         this.startWorkingDay = startWorkingDay;
         this.endWorkingDay = endWorkingDay;
         this.rating = rating;

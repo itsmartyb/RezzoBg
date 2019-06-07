@@ -17,6 +17,7 @@ public class EventService {
 
     public List<EventDtoForList> getAllEvents() {
         List<Event> events = eventRepository.findAll();
+        //az sum ebati prostaka
         return events.stream().map(event -> new EventDtoForList(event.getTitle(), event.getPictureUrl(), event.getActorsName()))
                 .collect(Collectors.toList());
     }

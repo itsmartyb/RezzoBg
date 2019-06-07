@@ -11,4 +11,6 @@ public class Encoder {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    //Nishto ne pravq po cql den
 }

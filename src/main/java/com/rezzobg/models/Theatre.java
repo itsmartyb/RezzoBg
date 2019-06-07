@@ -18,6 +18,7 @@ public class Theatre extends Place{
     @OneToMany(mappedBy = "theatre")
     private Set<Genre> genres = new HashSet<>();
 
+
     public Theatre(String name, Time startWorkingDay, Time endWorkingDay,
                       double rating, String description, int places, Address address, String actorNames) {
 

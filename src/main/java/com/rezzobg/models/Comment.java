@@ -23,6 +23,7 @@ public class Comment {
     private String text;
     private int rating;
     private LocalDate date;
+    //Martineee zashto draznish Zlattyyy?? >:(
     private Time hour;
     @ManyToOne
     @JoinColumn(name = "user_id")

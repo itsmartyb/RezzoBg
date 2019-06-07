@@ -23,6 +23,7 @@ public class Proposal {
     private String pictureUrl;
     private String description;
     private String title;
+    //smotanqk
     private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "place_id")

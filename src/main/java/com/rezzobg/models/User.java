@@ -53,4 +53,8 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.comments = new LinkedList<>();
     }
+
+    /** Marty obicha Zlatty!!! */
+    /**Zlaty i Djemii sa N1*/
+
 }

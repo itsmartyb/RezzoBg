@@ -22,6 +22,8 @@ public class Genre extends Characteristic {
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
 
+    //Marty mrazi jenite
+
     public Genre(String name) {
         super(1l, name);
     }

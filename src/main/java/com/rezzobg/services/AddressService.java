@@ -14,6 +14,7 @@ public class AddressService {
     public Address getAndSaveAddress(SignUpDTO signUpDTO) throws Exception {
         Address address = new Address(null, signUpDTO.getStreet(), signUpDTO.getArea(), signUpDTO.getCity(), signUpDTO.getCountry());
         this.addressRepository.save(address);
+        //maimuna
         return address;
     }
 
