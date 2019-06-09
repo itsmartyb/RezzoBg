@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.LinkedList;
@@ -30,6 +32,8 @@ public class Place {
     @Column
     private Time endWorkingDay;
     @Column
+    private String midAmount;
+    @Column
     private double rating;
     @Column
     private String description;
@@ -39,18 +43,19 @@ public class Place {
     @JoinColumn(name = "address_id")
     private Address address;
     @OneToMany(mappedBy = "place")
-    List<Proposal> proposals;
+    private List<Proposal> proposals;
     @OneToMany(mappedBy = "place")
-    List<Comment> comments;
+    private List<Comment> comments;
     @OneToMany(mappedBy = "place")
-    List<Photo> photos;
+    private List<Photo> photos;
 
-    public Place(Long id, String name, Time startWorkingDay, Time endWorkingDay, double rating, String description, int places, Address address) {
+    public Place(Long id, String name, Time startWorkingDay, Time endWorkingDay,
+                 String midAmount, double rating, String description, int places, Address address) {
         this.id = id;
         this.name = name;
-        //Samo Liverpooollll
         this.startWorkingDay = startWorkingDay;
         this.endWorkingDay = endWorkingDay;
+        this.midAmount = midAmount;
         this.rating = rating;
         this.description = description;
         this.places = places;

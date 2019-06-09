@@ -14,8 +14,6 @@ import java.time.LocalDate;
 @Table(name = "proposals")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Proposal {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
@@ -23,7 +21,6 @@ public class Proposal {
     private String pictureUrl;
     private String description;
     private String title;
-    //smotanqk
     private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "place_id")

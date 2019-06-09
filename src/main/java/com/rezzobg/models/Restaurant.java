@@ -17,11 +17,8 @@ public class Restaurant extends Place {
     @OneToMany(mappedBy = "restaurant")
     private Set<Kitchen> kitchens = new HashSet<>();
 
-    public Restaurant(String name, Time startWorkingDay, Time endWorkingDay,
+    public Restaurant(String name, Time startWorkingDay, Time endWorkingDay, String midAmount,
                       double rating, String description, int places, Address address, String kitchen) {
-
-        super(1l, name, startWorkingDay, endWorkingDay, rating, description, places, address);
+        super(null, name, startWorkingDay, endWorkingDay, midAmount, rating, description, places, address);
     }
-
-
 }

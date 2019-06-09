@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.sql.Time;
 import java.time.LocalDate;
 
 @Getter
@@ -12,10 +13,10 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "events")
 public class Event extends Proposal{
-    private String actorsName;
+    private Time hour;
 
-    public Event(String pictureUrl, String description, String title, LocalDate date, String actorsName, Place place) {
-        super(1l, pictureUrl, description, title, date, place);
-        this.actorsName = actorsName;
+    public Event(String pictureUrl, String description, String title, LocalDate date, Time hour, Place place) {
+        super(null, pictureUrl, description, title, date, place);
+        this.hour = hour;
     }
 }

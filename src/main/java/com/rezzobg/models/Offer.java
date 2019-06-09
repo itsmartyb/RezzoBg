@@ -16,7 +16,7 @@ public class Offer extends Proposal {
     private int price;
 
     public Offer(String pictureUrl, String description, String title, LocalDate date, int price, Place place) {
-        super(1l, pictureUrl, description, title, date, place);
+        super(null, pictureUrl, description, title, date, place);
         this.price = price;
     }
 }

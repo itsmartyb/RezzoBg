@@ -29,6 +29,9 @@ public class UserService {
     private AddressService addressService;
 
     @Autowired
+    private CityService cityService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Transactional(rollbackOn = Exception.class)
@@ -37,7 +40,6 @@ public class UserService {
         if(user != null) {
             throw new UsernameExistsException("User with such username already exists!");
         }
-        //govedo
         Address address = addressService.getAndSaveAddress(signUpDTO);
         User newUser = new User(signUpDTO.getUsername(), this.passwordEncoder.encode(signUpDTO.getPassword()), signUpDTO.getFirstName(),
                     signUpDTO.getLastName(), signUpDTO.getTelephone(),

@@ -21,6 +21,8 @@ public class Address {
     private Long id;
     private String street;
     private String area;
-    private String city;
+    @OneToOne
+    @JoinColumn(name = "city_id")
+    private City city;
     private String country;
 }

@@ -20,6 +20,7 @@ public class Booking {
     private Long id;
     private int places;
     private int discount;
+    private String description;
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;

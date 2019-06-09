@@ -18,13 +18,8 @@ public class Genre extends Characteristic {
     @ManyToOne
     @JoinColumn(name = "club_id")
     private Club club;
-    @ManyToOne
-    @JoinColumn(name = "theatre_id")
-    private Theatre theatre;
-
-    //Marty mrazi jenite
 
     public Genre(String name) {
-        super(1l, name);
+        super(null, name);
     }
 }

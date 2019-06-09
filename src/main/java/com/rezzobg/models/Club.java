@@ -17,9 +17,9 @@ public class Club extends Place {
     @OneToMany(mappedBy = "club")
     private Set<Genre> genres = new HashSet<>();
 
-    public Club(String name, Time startWorkingDay, Time endWorkingDay,
+    public Club(String name, Time startWorkingDay, Time endWorkingDay, String midAmount,
                       double rating, String description, int places, Address address, String genre) {
 
-        super(1l, name, startWorkingDay, endWorkingDay, rating, description, places, address);
+        super(null, name, startWorkingDay, endWorkingDay, midAmount, rating, description, places, address);
     }
 }
