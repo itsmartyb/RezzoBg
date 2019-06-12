@@ -1,6 +1,9 @@
 package com.rezzobg.controllers;
 
 import com.rezzobg.dto.PlaceDtoForList;
+import com.rezzobg.exceptions.InvalidClubException;
+import com.rezzobg.exceptions.InvalidRestaurantException;
+import com.rezzobg.models.Club;
 import com.rezzobg.models.Restaurant;
 import com.rezzobg.services.ClubService;
 import com.rezzobg.services.RestaurantService;
@@ -31,8 +34,23 @@ public class PlaceController {
         return clubService.getAllClubs();
     }
 
-    @GetMapping("/clubs/{cityId}")
+    @GetMapping("/{cityId}/clubs")
     public List<PlaceDtoForList> getAllClubsByCity(@PathVariable(required = false) Long cityId) {
         return clubService.getAllClubsByCity(cityId);
+    }
+
+    @GetMapping("/{cityId}/restaurants")
+    public List<PlaceDtoForList> getAllRestaurantsByCity(@PathVariable(required = false) Long cityId) {
+        return restaurantService.getAllRestaurantsByCity(cityId);
+    }
+
+    @GetMapping("/clubs/{clubId}")
+    public Club getClubDetails(@PathVariable(required = false) Long clubId) throws InvalidClubException {
+        return clubService.getClubDetails(clubId);
+    }
+
+    @GetMapping("/restaurants/{restaurantId}")
+    public Restaurant getRestaurantDetails(@PathVariable(required = false) Long restaurantId) throws InvalidRestaurantException {
+        return restaurantService.getRestaurantDetails(restaurantId);
     }
 }

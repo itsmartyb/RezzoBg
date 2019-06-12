@@ -1,6 +1,9 @@
 package com.rezzobg.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +27,7 @@ public class Proposal {
     private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "place_id")
+    @JsonBackReference
     private Place place;
 
     public Proposal(Long id, String pictureUrl, String description, String title, LocalDate date, Place place) {

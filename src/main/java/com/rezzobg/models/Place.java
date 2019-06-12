@@ -1,5 +1,6 @@
 package com.rezzobg.models;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,6 +21,9 @@ import java.util.List;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.StringIdGenerator.class,
+        property="place")
 public class Place {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,14 +44,19 @@ public class Place {
     private String description;
     @Column
     private int places;
+    @Column
+    private LocalDate date;
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
     @OneToMany(mappedBy = "place")
+    @JsonManagedReference
     private List<Proposal> proposals;
     @OneToMany(mappedBy = "place")
+    @JsonManagedReference
     private List<Comment> comments;
     @OneToMany(mappedBy = "place")
+    @JsonManagedReference
     private List<Photo> photos;
 
     public Place(Long id, String name, Time startWorkingDay, Time endWorkingDay,
@@ -63,5 +73,6 @@ public class Place {
         this.proposals = new LinkedList<>();
         this.comments = new LinkedList<>();
         this.photos = new LinkedList<>();
+        this.date = LocalDate.now();
     }
 }

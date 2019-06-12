@@ -18,7 +18,6 @@ public class Genre extends Characteristic {
     @ManyToOne
     @JoinColumn(name = "club_id")
     private Club club;
-
     public Genre(String name) {
         super(null, name);
     }
