@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, Long> {
-    public List<Genre> findByClubId(Long id);
+    public List<Genre> findByClubs(Long id);
 }

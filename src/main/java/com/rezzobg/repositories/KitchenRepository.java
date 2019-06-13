@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface KitchenRepository extends JpaRepository<Kitchen, Long> {
-    public List<Kitchen> findByRestaurantId(Long id);
+    public List<Kitchen> findByRestaurants(Long id);
 }

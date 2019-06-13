@@ -26,7 +26,7 @@ public class PlaceController {
 
     @GetMapping("/restaurants")
     public List<PlaceDtoForList> getAllRestaurants() {
-        return restaurantService.getAllRestaurants();
+       return restaurantService.getAllRestaurants();
     }
 
     @GetMapping("/clubs")

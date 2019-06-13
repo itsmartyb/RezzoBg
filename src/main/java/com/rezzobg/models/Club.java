@@ -14,7 +14,11 @@ import java.util.Set;
 @Entity
 @Table(name = "clubs")
 public class Club extends Place {
-    @OneToMany(mappedBy = "club")
+    @ManyToMany
+    @JoinTable(
+            name = "clubs_has_genres",
+            joinColumns = @JoinColumn(name = "club_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres = new HashSet<>();
 
     public Club(String name, Time startWorkingDay, Time endWorkingDay, String midAmount,

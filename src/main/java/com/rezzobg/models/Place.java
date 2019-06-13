@@ -58,6 +58,13 @@ public class Place {
     @OneToMany(mappedBy = "place")
     @JsonManagedReference
     private List<Photo> photos;
+    @ManyToMany
+    @JsonManagedReference
+    @JoinTable(
+            name = "place_has_extras",
+            joinColumns = @JoinColumn(name = "place_id"),
+            inverseJoinColumns = @JoinColumn(name = "extra_id"))
+    private List<Extra> extras;
 
     public Place(Long id, String name, Time startWorkingDay, Time endWorkingDay,
                  String midAmount, double rating, String description, int places, Address address) {

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,9 +16,9 @@ import javax.persistence.*;
 @Table(name = "genres")
 public class Genre extends Characteristic {
 
-    @ManyToOne
-    @JoinColumn(name = "club_id")
-    private Club club;
+    @ManyToMany(mappedBy = "genres")
+    private List<Club> clubs;
+
     public Genre(String name) {
         super(null, name);
     }

@@ -26,7 +26,7 @@ public class ClubService {
     private List<PlaceDtoForList> collectClubs(List<Club> clubs) {
         return clubs.stream().map(club -> new PlaceDtoForList(club.getName(), club.getPhotos().get(0).getUrl(),
                 club.getMidAmount(), club.getAddress().getArea(), club.getRating(),
-                genreRepository.findByClubId(club.getId()).stream()
+                genreRepository.findByClubs(club.getId()).stream()
                         .map(genre -> genre.getName()).collect(Collectors.toList()))).collect(Collectors.toList());
     }
 
