@@ -1,5 +1,7 @@
 package com.rezzobg.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 public class Genre extends Characteristic {
 
     @ManyToMany(mappedBy = "genres")
+    @JsonBackReference
     private List<Club> clubs;
 
     public Genre(String name) {

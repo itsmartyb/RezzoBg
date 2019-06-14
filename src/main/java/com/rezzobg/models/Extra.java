@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -19,13 +20,13 @@ import java.util.List;
 public class Extra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonBackReference
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "extras")
-    private List<Place> places;
-
-    public Extra(String name) {
-        this.name = name;
-    }
+    @JsonBackReference
+    @ManyToMany
+    @JoinTable(
+            name = "places_has_extras",
+            joinColumns = @JoinColumn(name = "extra_id"),
+            inverseJoinColumns = @JoinColumn(name = "place_id"))
+    private Set<Place> places;
 }

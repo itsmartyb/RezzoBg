@@ -23,7 +23,7 @@ public class RestaurantService {
     private List<PlaceDtoForList> collectRestaurants(List<Restaurant> restaurants) {
         return restaurants.stream().map(restaurant -> new PlaceDtoForList(restaurant.getName(), restaurant.getPhotos().get(0).getUrl(),
                 restaurant.getMidAmount(), restaurant.getAddress().getArea(), restaurant.getRating(),
-                kitchenRepository.findByRestaurants(restaurant.getId()).stream()
+                kitchenRepository.findByRestaurantsId(restaurant.getId()).stream()
                         .map(kitchen -> kitchen.getName()).collect(Collectors.toList()))).collect(Collectors.toList());
 
     }

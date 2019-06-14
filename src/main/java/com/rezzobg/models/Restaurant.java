@@ -1,5 +1,7 @@
 package com.rezzobg.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,14 +17,15 @@ import java.util.Set;
 @Table(name = "restaurants")
 public class Restaurant extends Place {
     @ManyToMany
+    @JsonManagedReference
     @JoinTable(
-            name = "restaurant_has_kitchen",
+            name = "restaurants_has_kitchens",
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "kitchen_id"))
     private Set<Kitchen> kitchens = new HashSet<>();
 
     public Restaurant(String name, Time startWorkingDay, Time endWorkingDay, String midAmount,
-                      double rating, String description, int places, Address address, String kitchen) {
+                      double rating, String description, int places, Address address) {
         super(null, name, startWorkingDay, endWorkingDay, midAmount, rating, description, places, address);
     }
 }

@@ -1,8 +1,6 @@
 package com.rezzobg.services;
 
-import com.rezzobg.dto.EventDtoForList;
 import com.rezzobg.dto.OfferDtoForList;
-import com.rezzobg.dto.ProposalDtoForList;
 import com.rezzobg.models.Offer;
 import com.rezzobg.repositories.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
