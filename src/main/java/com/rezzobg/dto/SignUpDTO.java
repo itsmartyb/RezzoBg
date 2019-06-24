@@ -23,9 +23,8 @@ public class SignUpDTO {
     @NotBlank(message = "First name is not long enough")
     private String firstName;
     @Size(max = 20, min = 3, message = "{user.name.invalid}")
-    @NotEmpty(message = "Last name is not long enough")
+    @NotBlank(message = "Last name is not long enough")
     private String lastName;
-    //@Pattern(regexp = "^\\+[0-9]{1,3}\\.[0-9]{4,14}(?:x.+)?$", message = "Telephone isn't standard for EU")
     @NotBlank(message = "Telephone is not long enough")
     private String telephone;
     @NotBlank(message = "Street is not long enough")

@@ -1,5 +1,6 @@
 package com.rezzobg.services;
 
+import com.rezzobg.dto.AddressDTO;
 import com.rezzobg.dto.LoginDTO;
 import com.rezzobg.dto.SignUpDTO;
 import com.rezzobg.exceptions.BadRequestException;
@@ -40,13 +41,22 @@ public class UserService {
         if(user != null) {
             throw new UsernameExistsException("User with such username already exists!");
         }
-        Address address = addressService.getAndSaveAddress(signUpDTO);
-        User newUser = new User(signUpDTO.getUsername(), this.passwordEncoder.encode(signUpDTO.getPassword()), signUpDTO.getFirstName(),
-                    signUpDTO.getLastName(), signUpDTO.getTelephone(),
-               address, signUpDTO.getDateOfBirth());
-
+        Address address = manageAddress(signUpDTO);
+        User newUser = manageUser(address, signUpDTO);
         this.userRepository.save(newUser);
         return true;
+    }
+
+    private Address manageAddress(SignUpDTO signUpDTO) {
+        return addressService.getAndSaveAddress(new AddressDTO(signUpDTO.getStreet(), signUpDTO.getArea(),
+                signUpDTO.getCity(), signUpDTO.getCountry()));
+
+    }
+
+    private User manageUser(Address address, SignUpDTO signUpDTO) {
+        return new User(signUpDTO.getUsername(), this.passwordEncoder.encode(signUpDTO.getPassword()), signUpDTO.getFirstName(),
+                signUpDTO.getLastName(), signUpDTO.getTelephone(),
+                address, signUpDTO.getDateOfBirth());
     }
 
     private void checkForValidUser(LoginDTO loginDTO, User user) throws UserNotExistsException  {

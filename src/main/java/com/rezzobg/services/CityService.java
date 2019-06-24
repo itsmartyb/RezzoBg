@@ -11,10 +11,10 @@ public class CityService {
     @Autowired
     private CityRepository cityRepository;
 
-    public City getCity(SignUpDTO signUpDTO) {
-        City city = cityRepository.findByName(signUpDTO.getCity());
+    public City getAndSaveCity(String cityName) {
+        City city = cityRepository.findByName(cityName);
         if(city == null) {
-            city = new City(null, signUpDTO.getCity());
+            city = new City(null, cityName);
             cityRepository.save(city);
         }
         return city;

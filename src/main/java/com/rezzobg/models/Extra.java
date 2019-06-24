@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 
@@ -29,4 +28,8 @@ public class Extra {
             joinColumns = @JoinColumn(name = "extra_id"),
             inverseJoinColumns = @JoinColumn(name = "place_id"))
     private Set<Place> places;
+
+    public Extra(String name) {
+        this.name = name;
+    }
 }

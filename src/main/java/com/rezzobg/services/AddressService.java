@@ -1,5 +1,6 @@
 package com.rezzobg.services;
 
+import com.rezzobg.dto.AddressDTO;
 import com.rezzobg.dto.SignUpDTO;
 import com.rezzobg.models.Address;
 import com.rezzobg.models.City;
@@ -15,11 +16,10 @@ public class AddressService {
     @Autowired
     private CityService cityService;
 
-    public Address getAndSaveAddress(SignUpDTO signUpDTO) throws Exception {
-        Address address = new Address(null, signUpDTO.getStreet(), signUpDTO.getArea(),
-                cityService.getCity(signUpDTO), signUpDTO.getCountry());
+    public Address getAndSaveAddress(AddressDTO addressDTO) {
+        Address address = new Address(null, addressDTO.getStreet(), addressDTO.getArea(),
+                cityService.getAndSaveCity(addressDTO.getCity()), addressDTO.getCountry());
         this.addressRepository.save(address);
         return address;
     }
-
 }

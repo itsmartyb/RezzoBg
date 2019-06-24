@@ -42,6 +42,8 @@ public class Place {
     private double rating;
     @Column
     private String description;
+   // @Column
+    //private int discount;
     @Column
     private int places;
     @Column
@@ -49,7 +51,7 @@ public class Place {
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
-    @OneToMany(mappedBy = "place")
+    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST)
     @JsonManagedReference
     private List<Proposal> proposals;
     @OneToMany(mappedBy = "place")
@@ -58,7 +60,7 @@ public class Place {
     @OneToMany(mappedBy = "place")
     @JsonManagedReference
     private List<Photo> photos;
-    @ManyToMany(mappedBy = "places")
+    @ManyToMany(mappedBy = "places", cascade = CascadeType.PERSIST)
     @JsonManagedReference
     private List<Extra> extras;
 

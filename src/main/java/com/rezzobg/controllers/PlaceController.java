@@ -8,10 +8,7 @@ import com.rezzobg.models.Restaurant;
 import com.rezzobg.services.ClubService;
 import com.rezzobg.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,5 +49,10 @@ public class PlaceController {
     @GetMapping("/restaurants/{restaurantId}")
     public Restaurant getRestaurantDetails(@PathVariable(required = false) Long restaurantId) throws InvalidRestaurantException {
         return restaurantService.getRestaurantDetails(restaurantId);
+    }
+
+    @PostMapping("/restaurants/")
+    public void addRestaurant(@PathVariable(required = false) Long restaurantId) throws InvalidRestaurantException {
+
     }
 }

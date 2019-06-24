@@ -27,4 +27,8 @@ public class Photo {
     @JoinColumn(name = "place_id")
     @JsonBackReference
     private Place place;
+
+    public Photo(String url) {
+        this.url = url;
+    }
 }
