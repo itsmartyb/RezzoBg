@@ -1,10 +1,7 @@
 package com.rezzobg.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,17 +13,14 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "extras")
+@ToString
 public class Extra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @JsonBackReference
-    @ManyToMany
-    @JoinTable(
-            name = "places_has_extras",
-            joinColumns = @JoinColumn(name = "extra_id"),
-            inverseJoinColumns = @JoinColumn(name = "place_id"))
+    @ManyToMany(mappedBy = "extras")
     private Set<Place> places;
 
     public Extra(String name) {

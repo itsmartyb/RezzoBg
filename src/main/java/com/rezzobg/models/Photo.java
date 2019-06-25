@@ -28,7 +28,8 @@ public class Photo {
     @JsonBackReference
     private Place place;
 
-    public Photo(String url) {
+    public Photo(String url, Place place) {
         this.url = url;
+        this.place = place;
     }
 }

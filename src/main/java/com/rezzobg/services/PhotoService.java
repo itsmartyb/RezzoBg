@@ -9,10 +9,15 @@ import java.util.List;
 
 @Service
 public class PhotoService {
+
     @Autowired
     private PhotoRepository photoRepository;
 
-    public void savePhotos(List<Photo> photos) {
-        photoRepository.save(photos);
+    public void saveAll(List<Photo> photos) {
+        this.photoRepository.saveAll(photos);
+    }
+
+    public Photo savePhoto(Photo photo) {
+        return this.photoRepository.save(photo);
     }
 }

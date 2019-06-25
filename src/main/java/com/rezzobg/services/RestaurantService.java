@@ -6,7 +6,6 @@ import com.rezzobg.dto.RestaurantDTO;
 import com.rezzobg.exceptions.InvalidRestaurantException;
 import com.rezzobg.models.*;
 import com.rezzobg.repositories.*;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class RestaurantService {
     private RestaurantRepository restaurantRepository;
 
     @Autowired
-    private KitchenRepository kitchenRepository;
+    private KitchenService kitchenService;
 
     @Autowired
     private AddressService addressService;
@@ -31,10 +30,13 @@ public class RestaurantService {
     private ExtraService extraService;
 
     @Autowired
-    private CharacteristicRepository characteristicRepository;
+    private KitchenRepository kitchenRepository;
 
     @Autowired
     private PlaceRepository placeRepository;
+
+    @Autowired
+    private CharacteristicService characteristicService;
 
 
     private List<PlaceDtoForList> collectRestaurants(List<Restaurant> restaurants) {
@@ -71,31 +73,53 @@ public class RestaurantService {
                 restaurantDTO.getArea(), restaurantDTO.getCity(), restaurantDTO.getCountry()));
     }
 
-    public void addRestaurant(RestaurantDTO restaurantDTO) {
-        Address address = manageAddress(restaurantDTO);
-        List<Extra> extras = restaurantDTO.getExtras().stream().map(extraName -> new Extra(extraName)).collect(Collectors.toList());
-        for(Extra extra: extras) {
-            if(!extraService.isInDatabase(extra)) {
-                extraService.saveExtra(extra);
+    private List<Photo> getPhotos(RestaurantDTO restaurantDTO, Place place) {
+        return restaurantDTO.getUrlPhotos().stream().map(url -> new Photo(url, place)).collect(Collectors.toList());
+    }
+
+    private Set<Extra> getAndSaveExtras(RestaurantDTO restaurantDTO) {
+        Set<Extra> extras = new HashSet<>();
+        for(String extra: restaurantDTO.getExtras()) {
+            if(!this.extraService.isInDatabase(extra)) {
+                extras.add(this.extraService.saveExtra(new Extra(extra)));
+            } else {
+                extras.add(this.extraService.findExtra(extra));
             }
         }
+         return extras;
+    }
 
-        List<String> photoURL = restaurantDTO.getUrlPhotos();
-        List<Photo> photos = photoURL.stream().map(url -> new Photo(url)).collect(Collectors.toList());
-        Set<Characteristic> characteristics;
-        List<String> kitchenNames = restaurantDTO.getKitchenNames();
-        characteristics = kitchenNames.stream().map(kitchenName -> new Characteristic(null, kitchenName)).collect(Collectors.toSet());
-        for(Characteristic c : characteristics) {
-
+    private Set<Kitchen> getAndSaveCharacteristics(RestaurantDTO restaurantDTO) {
+        Set<Kitchen> kitchens = new HashSet<>();
+        for(String name: restaurantDTO.getKitchenNames()) {
+            if(!this.characteristicService.isInDatabase(name)) {
+                kitchens.add(this.kitchenService.saveKitchen(new Kitchen(name)));
+            } else {
+                kitchens.add((Kitchen)this.characteristicService.findCharacteristic(name));
+            }
         }
+        return kitchens;
+    }
+
+    public void addRestaurant(RestaurantDTO restaurantDTO) {
+        Address address = manageAddress(restaurantDTO);
         Restaurant restaurant = new Restaurant(restaurantDTO.getName(), restaurantDTO.getStartWorkingDay(), restaurantDTO.getEndWorkingDay(),
                 restaurantDTO.getMidAmount(), 0.0, restaurantDTO.getDescription(), restaurantDTO.getPlaces(), address);
-        restaurant.setPhotos(photos);
-        // characteristicRepository.save(characteristics);
-        //photoService.savePhotos(photos);
-        // extraService.saveExtras(extras);
+
+        Set<Kitchen> kitchens = getAndSaveCharacteristics(restaurantDTO);
+        Set<Extra> extras = getAndSaveExtras(restaurantDTO);
+
+        restaurant.setKitchens(kitchens);
         restaurant.setExtras(extras);
-        placeRepository.save(restaurant);
-        restaurantRepository.save(restaurant);
+        System.out.println(restaurant.getExtras());
+
+        Restaurant r = this.restaurantRepository.save(restaurant);
+        List<Photo> photos = getPhotos(restaurantDTO, r);
+
+
+
+
+
+        this.photoService.saveAll(photos);
     }
 }

@@ -10,8 +10,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import javax.persistence.*;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 
 @Table(name = "places")
@@ -42,8 +44,8 @@ public class Place {
     private double rating;
     @Column
     private String description;
-   // @Column
-    //private int discount;
+    @Column
+    private int discount;
     @Column
     private int places;
     @Column
@@ -51,7 +53,7 @@ public class Place {
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
-    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "place")
     @JsonManagedReference
     private List<Proposal> proposals;
     @OneToMany(mappedBy = "place")
@@ -60,9 +62,13 @@ public class Place {
     @OneToMany(mappedBy = "place")
     @JsonManagedReference
     private List<Photo> photos;
-    @ManyToMany(mappedBy = "places", cascade = CascadeType.PERSIST)
+    @ManyToMany
+    @JoinTable(
+            name = "places_has_extras",
+            joinColumns = @JoinColumn(name = "place_id"),
+            inverseJoinColumns = @JoinColumn(name = "extra_id"))
     @JsonManagedReference
-    private List<Extra> extras;
+    private Set<Extra> extras;
 
     public Place(Long id, String name, Time startWorkingDay, Time endWorkingDay,
                  String midAmount, double rating, String description, int places, Address address) {
@@ -78,6 +84,7 @@ public class Place {
         this.proposals = new LinkedList<>();
         this.comments = new LinkedList<>();
         this.photos = new LinkedList<>();
+        this.extras = new HashSet<>();
         this.date = LocalDate.now();
     }
 }

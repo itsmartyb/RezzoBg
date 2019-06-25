@@ -1,6 +1,7 @@
 package com.rezzobg.controllers;
 
 import com.rezzobg.dto.PlaceDtoForList;
+import com.rezzobg.dto.RestaurantDTO;
 import com.rezzobg.exceptions.InvalidClubException;
 import com.rezzobg.exceptions.InvalidRestaurantException;
 import com.rezzobg.models.Club;
@@ -10,6 +11,7 @@ import com.rezzobg.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -51,8 +53,8 @@ public class PlaceController {
         return restaurantService.getRestaurantDetails(restaurantId);
     }
 
-    @PostMapping("/restaurants/")
-    public void addRestaurant(@PathVariable(required = false) Long restaurantId) throws InvalidRestaurantException {
-
+    @PostMapping("/restaurants")
+    public void addRestaurant(@Valid @RequestBody RestaurantDTO restaurantDTO) throws InvalidRestaurantException {
+        this.restaurantService.addRestaurant(restaurantDTO);
     }
 }

@@ -2,23 +2,27 @@ package com.rezzobg.services;
 
 import com.rezzobg.models.Extra;
 import com.rezzobg.repositories.ExtraRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ExtraService {
+    @Autowired
     private ExtraRepository extraRepository;
 
-    public void saveExtras(List<Extra> extras) {
+    public void saveAll(List<Extra> extras) {
         this.extraRepository.save(extras);
     }
 
-    public boolean isInDatabase(Extra extra) {
-        return this.extraRepository.findByName(extra.getName()) != null;
+    public Extra findExtra(String name) { return this.extraRepository.findByName(name);}
+
+    public boolean isInDatabase(String name) {
+        return this.extraRepository.findByName(name) != null;
     }
 
-    public void saveExtra(Extra extra) {
-        this.extraRepository.save(extra);
+    public Extra saveExtra(Extra extra) {
+        return this.extraRepository.save(extra);
     }
 }

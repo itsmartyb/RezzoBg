@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface PhotoRepository extends JpaRepository<Photo, Long> {
     public void save(List<Photo> photos);
-    public Photo findByName(String name);
 }
