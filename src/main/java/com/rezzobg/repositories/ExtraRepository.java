@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ExtraRepository extends JpaRepository<Extra, Long> {
-    public Extra save(List<Extra> extras);
     public Extra findByName(String name);
 }

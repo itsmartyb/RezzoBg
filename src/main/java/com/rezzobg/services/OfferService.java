@@ -1,8 +1,10 @@
 package com.rezzobg.services;
 
+import com.rezzobg.dto.OfferDTO;
 import com.rezzobg.dto.OfferDetailsDTO;
 import com.rezzobg.dto.OfferDtoForList;
 import com.rezzobg.exceptions.InvalidOfferException;
+import com.rezzobg.exceptions.InvalidPlaceException;
 import com.rezzobg.models.Offer;
 import com.rezzobg.models.Place;
 import com.rezzobg.models.Proposal;
@@ -31,17 +33,26 @@ public class OfferService {
                 .collect(Collectors.toList());
     }
 
-    public OfferDetailsDTO getOfferDetails(Long id) throws InvalidOfferException {
+    public OfferDetailsDTO getOfferDetails(Long id) throws InvalidOfferException, InvalidPlaceException {
         Optional<Offer> offerFromDB = offerRepository.findById(id);
         Offer offer = null;
-        Proposal proposal = null;
         try {
             offer  = offerFromDB.get();
         } catch(Exception e) {
             throw new InvalidOfferException();
         }
-        Optional<Place> place = placeRepository.findById(id);
         return new OfferDetailsDTO(offer.getId(), offer.getPictureUrl(), offer.getDescription(),
-                offer.getTitle(), offer.getDate(), offer.getPrice(), place.get());
+                offer.getTitle(), offer.getDate(),
+                offer.getPrice(), placeRepository.findByName(offer.getPlace().getName()));
+    }
+
+    public Long addOffer(OfferDTO offerDTO) throws InvalidPlaceException {
+        if(placeRepository.findByName(offerDTO.getPlaceName()) == null) {
+            throw new InvalidPlaceException();
+        }
+        Offer offer = new Offer(offerDTO.getUrl(), offerDTO.getDescription(), offerDTO.getTitle(),
+                offerDTO.getDate(), offerDTO.getPrice(), placeRepository.findByName(offerDTO.getPlaceName()));
+        offerRepository.save(offer);
+        return offer.getId();
     }
 }

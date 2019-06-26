@@ -68,7 +68,7 @@ public class Place {
             joinColumns = @JoinColumn(name = "place_id"),
             inverseJoinColumns = @JoinColumn(name = "extra_id"))
     @JsonManagedReference
-    private Set<Extra> extras;
+    private List<Extra> extras;
 
     public Place(Long id, String name, Time startWorkingDay, Time endWorkingDay,
                  String midAmount, double rating, String description, int places, Address address) {
@@ -84,7 +84,7 @@ public class Place {
         this.proposals = new LinkedList<>();
         this.comments = new LinkedList<>();
         this.photos = new LinkedList<>();
-        this.extras = new HashSet<>();
+        this.extras = new LinkedList<>();
         this.date = LocalDate.now();
     }
 }

@@ -13,8 +13,8 @@ public class PhotoService {
     @Autowired
     private PhotoRepository photoRepository;
 
-    public void saveAll(List<Photo> photos) {
-        this.photoRepository.saveAll(photos);
+    public List<Photo> saveAll(List<Photo> photos) {
+        return this.photoRepository.saveAll(photos);
     }
 
     public Photo savePhoto(Photo photo) {

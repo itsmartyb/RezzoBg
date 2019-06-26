@@ -12,8 +12,8 @@ public class ExtraService {
     @Autowired
     private ExtraRepository extraRepository;
 
-    public void saveAll(List<Extra> extras) {
-        this.extraRepository.save(extras);
+    public List<Extra> saveAll(List<Extra> extras) {
+       return this.extraRepository.saveAll(extras);
     }
 
     public Extra findExtra(String name) { return this.extraRepository.findByName(name);}

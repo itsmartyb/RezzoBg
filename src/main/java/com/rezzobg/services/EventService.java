@@ -1,18 +1,16 @@
 package com.rezzobg.services;
 
+import com.rezzobg.dto.EventDTO;
 import com.rezzobg.dto.EventDetailsDTO;
 import com.rezzobg.dto.EventDtoForList;
 import com.rezzobg.exceptions.InvalidEventException;
+import com.rezzobg.exceptions.InvalidPlaceException;
 import com.rezzobg.models.Event;
 import com.rezzobg.models.Place;
-import com.rezzobg.models.Proposal;
 import com.rezzobg.repositories.EventRepository;
 import com.rezzobg.repositories.PlaceRepository;
-import com.rezzobg.repositories.ProposalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,17 +29,27 @@ public class EventService {
                 .collect(Collectors.toList());
     }
 
-    public EventDetailsDTO getOfferDetails(Long id) throws InvalidEventException {
-        Optional<Event> offerFromDB = eventRepository.findById(id);
+    public EventDetailsDTO getEventDetails(Long id) throws InvalidEventException, InvalidPlaceException {
+        Optional<Event> eventFromDB = eventRepository.findById(id);
         Event event = null;
         try {
-            event  = offerFromDB.get();
+            event  = eventFromDB.get();
         } catch(Exception e) {
             throw new InvalidEventException();
         }
-        Optional<Place> place = placeRepository.findById(id);
         return new EventDetailsDTO(event.getId(), event.getPictureUrl(), event.getDescription(),
-                event.getTitle(), event.getDate(), event.getHour(), place.get());
+                event.getTitle(), event.getDate(),
+                event.getHour(), placeRepository.findByName(event.getPlace().getName()));
+    }
+
+    public Long addEvent(EventDTO eventDTO) throws InvalidPlaceException {
+        if(placeRepository.findByName(eventDTO.getPlaceName()) == null) {
+            throw new InvalidPlaceException();
+        }
+        Event event = new Event(eventDTO.getUrl(), eventDTO.getDescription(), eventDTO.getTitle(),
+                eventDTO.getDate(), eventDTO.getHour(), placeRepository.findByName(eventDTO.getPlaceName()));
+        eventRepository.save(event);
+        return event.getId();
     }
 }
 

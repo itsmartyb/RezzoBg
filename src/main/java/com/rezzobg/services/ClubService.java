@@ -1,23 +1,34 @@
 package com.rezzobg.services;
 
+import com.rezzobg.dto.PlaceDTO;
 import com.rezzobg.dto.PlaceDtoForList;
 import com.rezzobg.exceptions.InvalidClubException;
-import com.rezzobg.models.Club;
+import com.rezzobg.models.*;
 import com.rezzobg.repositories.ClubRepository;
 import com.rezzobg.repositories.GenreRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class ClubService {
+public class ClubService extends PlaceService{
     @Autowired
     private ClubRepository clubRepository;
 
     @Autowired
     private GenreRepository genreRepository;
+
+    @Autowired
+    private CharacteristicService characteristicService;
+
+    @Autowired
+    private GenreService genreService;
 
     private List<PlaceDtoForList> collectClubs() {
         return collectClubs();
@@ -50,5 +61,27 @@ public class ClubService {
             throw new InvalidClubException();
         }
         return club;
+    }
+
+    private Set<Genre> getAndSaveCharacteristics(PlaceDTO placeDTO) {
+        Set<Genre> genres = new HashSet<>();
+        for(String name: placeDTO.getCharacteristicNames()) {
+            if(!this.characteristicService.isInDatabase(name)) {
+                genres.add(this.genreService.saveGenre(new Genre(name)));
+            } else {
+                genres.add((Genre)this.characteristicService.findCharacteristic(name));
+            }
+        }
+        return genres;
+    }
+
+    public void addClub(PlaceDTO placeDTO) {
+        Address address = manageAddress(placeDTO);
+        Club club = new Club(placeDTO.getName(), placeDTO.getStartWorkingDay(), placeDTO.getEndWorkingDay(),
+                placeDTO.getMidAmount(), 0.0, placeDTO.getDescription(), placeDTO.getPlaces(), address);
+        club.setGenres(getAndSaveCharacteristics(placeDTO));
+        club.setExtras(getAndSaveExtras(placeDTO));
+        Club c = this.clubRepository.save(club);
+        List<Photo> photos = getPhotos(placeDTO, c);
     }
 }
