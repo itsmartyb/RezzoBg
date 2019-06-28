@@ -5,6 +5,7 @@ import com.rezzobg.dto.SignUpDTO;
 import com.rezzobg.exceptions.*;
 import com.rezzobg.models.User;
 import com.rezzobg.services.UserService;
+import com.rezzobg.services.UserStory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,19 +30,18 @@ public class UserController {
 
     @PostMapping("/login")
     public void login(@Valid @RequestBody LoginDTO loginDTO, HttpServletRequest request) throws BadRequestException, UserNotExistsException, InvalidPasswordException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("userId") != null) {
+        if (UserStory.isUserLogged(request) == true) {
             throw new BadRequestException("The user is already logged in!");
         }
         User user  = this.userService.login(loginDTO);
-        session.setAttribute("userId", user.getId());
-        session.setAttribute("isAdmin", user.isAdmin());
+        request.getSession().setAttribute("userId", user.getId());
+        request.getSession().setAttribute("isAdmin", user.isAdmin());
     }
 
     @PostMapping("/logout")
     public void logout(HttpServletRequest request) throws UserIsLoggedInException {
         HttpSession session = request.getSession();
-        if(session.getAttribute("userId") == null) {
+        if(UserStory.isUserLogged(request) == false) {
             throw new UserIsLoggedInException();
         }
         session.invalidate();

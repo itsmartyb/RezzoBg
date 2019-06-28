@@ -3,11 +3,15 @@ package com.rezzobg.controllers;
 import com.rezzobg.dto.PlaceDTO;
 import com.rezzobg.dto.PlaceDtoForList;
 import com.rezzobg.exceptions.InvalidRestaurantException;
+import com.rezzobg.exceptions.InvalidUserException;
+import com.rezzobg.exceptions.UserIsLoggedInException;
 import com.rezzobg.models.Restaurant;
 import com.rezzobg.services.RestaurantService;
+import com.rezzobg.services.UserStory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -32,7 +36,16 @@ public class RestaurantController {
     }
 
     @PostMapping("/restaurants")
-    public void addRestaurant(@Valid @RequestBody PlaceDTO placeDTO) throws InvalidRestaurantException {
-        this.restaurantService.addRestaurant(placeDTO);
+    public void addRestaurant(@Valid @RequestBody PlaceDTO placeDTO, HttpServletRequest request) throws InvalidRestaurantException,
+            InvalidUserException, UserIsLoggedInException {
+        if (UserStory.isUserLogged(request)) {
+            if (UserStory.isAdminLogged(request)) {
+                this.restaurantService.addRestaurant(placeDTO);
+            } else {
+                throw new InvalidUserException();
+            }
+        } else {
+            throw new UserIsLoggedInException();
+        }
     }
 }
