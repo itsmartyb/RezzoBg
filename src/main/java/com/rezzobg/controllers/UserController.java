@@ -29,9 +29,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public void login(@Valid @RequestBody LoginDTO loginDTO, HttpServletRequest request) throws BadRequestException, UserNotExistsException, InvalidPasswordException {
+    public void login(@Valid @RequestBody LoginDTO loginDTO, HttpServletRequest request) throws UserIsLoggedInException, UserNotExistsException{
         if (UserStory.isUserLogged(request) == true) {
-            throw new BadRequestException("The user is already logged in!");
+            throw new UserIsLoggedInException("User is still logged in!");
         }
         User user  = this.userService.login(loginDTO);
         request.getSession().setAttribute("userId", user.getId());
@@ -39,10 +39,10 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletRequest request) throws UserIsLoggedInException {
+    public void logout(HttpServletRequest request) throws UserIsNotLoggedInException {
         HttpSession session = request.getSession();
         if(UserStory.isUserLogged(request) == false) {
-            throw new UserIsLoggedInException();
+            throw new UserIsNotLoggedInException("User is not logged in!");
         }
         session.invalidate();
     }

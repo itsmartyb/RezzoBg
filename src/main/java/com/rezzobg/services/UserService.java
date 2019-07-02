@@ -10,15 +10,12 @@ import com.rezzobg.exceptions.UsernameExistsException;
 import com.rezzobg.models.Address;
 import com.rezzobg.models.User;
 import com.rezzobg.repositories.UserRepository;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 
 @Service
@@ -36,7 +33,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional(rollbackOn = Exception.class)
-    public boolean signUp(SignUpDTO signUpDTO) throws Exception, UsernameExistsException {
+    public boolean signUp(SignUpDTO signUpDTO) throws UsernameExistsException {
         User user = userRepository.findByUsername(signUpDTO.getUsername());
         if(user != null) {
             throw new UsernameExistsException("User with such username already exists!");
@@ -68,9 +65,13 @@ public class UserService {
         }
     }
 
-    public User login(LoginDTO loginDTO) throws BadRequestException, UserNotExistsException, InvalidPasswordException {
+    public User login(LoginDTO loginDTO) throws UserNotExistsException {
         User user = userRepository.findByUsername(loginDTO.getUsername());
         checkForValidUser(loginDTO, user);
         return user;
+    }
+
+    public Optional<User> findById(Long id) {
+        return this.userRepository.findById(id);
     }
 }

@@ -1,5 +1,7 @@
 package com.rezzobg.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,6 +40,7 @@ public class User {
     private LocalDate dateOfBirth;
     @Column
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Comment> comments;
     @Column
     private boolean isAdmin;

@@ -2,10 +2,7 @@ package com.rezzobg.services;
 
 import com.rezzobg.dto.AddressDTO;
 import com.rezzobg.dto.PlaceDTO;
-import com.rezzobg.models.Address;
-import com.rezzobg.models.Extra;
-import com.rezzobg.models.Photo;
-import com.rezzobg.models.Place;
+import com.rezzobg.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +30,17 @@ public abstract class PlaceService {
 
     public List<Photo> getPhotos(PlaceDTO placeDTO, Place place) {
         return this.photoService.saveAll(placeDTO.getUrlPhotos().stream().map(url -> new Photo(url, place)).collect(Collectors.toList()));
+    }
+
+    public static double calculatePlaceRating(Place place) {
+        double rating = 0.0;
+        if(place.getComments().size() == 0) {
+            return rating;
+        }
+        for(Comment comment: place.getComments()) {
+            rating += comment.getRating();
+        }
+        return rating/(place.getComments().size());
     }
 
     public List<Extra> getAndSaveExtras(PlaceDTO placeDTO) {

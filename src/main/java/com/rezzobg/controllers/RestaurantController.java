@@ -42,10 +42,10 @@ public class RestaurantController {
             if (UserStory.isAdminLogged(request)) {
                 this.restaurantService.addRestaurant(placeDTO);
             } else {
-                throw new InvalidUserException();
+                throw new InvalidUserException("User does not have rights for this operation!");
             }
         } else {
-            throw new UserIsLoggedInException();
+            throw new UserIsLoggedInException("There is no such user!");
         }
     }
 }

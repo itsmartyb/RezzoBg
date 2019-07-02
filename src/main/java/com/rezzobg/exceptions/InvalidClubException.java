@@ -3,28 +3,34 @@ package com.rezzobg.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "There is no such club!")
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class InvalidClubException extends Exception {
     private static final long serialVersionUID = 297154967614160059L;
 
-    public InvalidClubException(String s) {
+    public InvalidClubException() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
     public InvalidClubException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
-    }
-
-    public InvalidClubException(Throwable cause) {
-        super(cause);
+        // TODO Auto-generated constructor stub
     }
 
     public InvalidClubException(String message, Throwable cause) {
         super(message, cause);
+        // TODO Auto-generated constructor stub
     }
 
-    public InvalidClubException() {
+    public InvalidClubException(String message) {
+        super(message);
+        // TODO Auto-generated constructor stub
     }
 
+    public InvalidClubException(Throwable cause) {
+        super(cause);
+        // TODO Auto-generated constructor stub
+    }
     @Override
     public Throwable fillInStackTrace() {
         return null;

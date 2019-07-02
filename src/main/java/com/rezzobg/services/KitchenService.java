@@ -15,11 +15,4 @@ public class KitchenService {
         return this.kitchenRepository.save(kitchen);
     }
 
-//    public void saveAll(Set<Kitchen> kitchens) {
-//        this.kitchenRepository.saveAll(kitchens);
-//    }
-
-//    public boolean isInDatabase(Kitchen kitchen) {
-//        return kitchenRepository.findById(kitchen.getId()) != null;
-//    }
 }

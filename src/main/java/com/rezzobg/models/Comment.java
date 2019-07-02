@@ -24,11 +24,12 @@ public class Comment {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     private String text;
-    private int rating;
     private LocalDate date;
+    private int rating;
     private Time hour;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
     @ManyToOne
     @JoinColumn(name = "place_id")

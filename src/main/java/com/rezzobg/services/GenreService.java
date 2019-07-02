@@ -20,7 +20,6 @@ public class GenreService {
         this.genreRepository.saveAll(kitchens);
     }
 
-
     public boolean isInDatabase(Genre genre) {
         return genreRepository.findById(genre.getId()) != null;
     }
