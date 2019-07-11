@@ -8,6 +8,7 @@ import com.rezzobg.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,15 @@ public class RestaurantService extends PlaceService {
 
     @Autowired
     private CharacteristicService characteristicService;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private PhotoRepository photoRepository;
 
 
     private List<PlaceDtoForList> collectRestaurants(List<Restaurant> restaurants) {
@@ -78,5 +88,21 @@ public class RestaurantService extends PlaceService {
         restaurant.setExtras(getAndSaveExtras(placeDTO));
         Restaurant r = this.restaurantRepository.save(restaurant);
         List<Photo> photos = getPhotos(placeDTO, r);
+    }
+
+    @Transactional
+    public void deleteRestaurant(Long restaurantId) throws InvalidRestaurantException {
+        Optional<Restaurant> restaurant = this.restaurantRepository.findById(restaurantId);
+        Restaurant rest = null;
+        try {
+              rest = restaurant.get();
+        } catch (Exception e) {
+            throw new InvalidRestaurantException("Such restaurant does not exist!");
+        }
+        this.commentRepository.removeByPlaceId(rest.getId());
+        this.addressRepository.removeById(rest.getAddress().getId());
+        this.photoRepository.deleteById(rest.getId());
+        this.restaurantRepository.delete(rest);
+
     }
 }

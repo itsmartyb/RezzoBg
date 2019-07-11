@@ -3,9 +3,10 @@ package com.rezzobg.services;
 import com.rezzobg.dto.AddressDTO;
 import com.rezzobg.dto.PlaceDTO;
 import com.rezzobg.models.*;
+import com.rezzobg.repositories.AddressRepository;
+import com.rezzobg.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,12 @@ public abstract class PlaceService {
 
     @Autowired
     private ExtraService extraService;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
 
     public Address manageAddress(PlaceDTO placeDTO) {

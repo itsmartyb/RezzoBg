@@ -7,6 +7,7 @@ import com.rezzobg.exceptions.InvalidUserException;
 import com.rezzobg.exceptions.UserIsLoggedInException;
 import com.rezzobg.models.Restaurant;
 import com.rezzobg.services.RestaurantService;
+import com.rezzobg.services.UserService;
 import com.rezzobg.services.UserStory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -47,5 +48,14 @@ public class RestaurantController {
         } else {
             throw new UserIsLoggedInException("There is no such user!");
         }
+    }
+
+    @DeleteMapping("/restaurants/{restaurantId}")
+    public void deleteRestaurant(@PathVariable Long restaurantId, HttpServletRequest request) throws
+            InvalidUserException, InvalidRestaurantException {
+        if(UserStory.isUserLogged(request) && UserStory.isAdminLogged(request)) {
+            this.restaurantService.deleteRestaurant(restaurantId);
+        }
+        throw new InvalidUserException("Admin should log in!");
     }
 }

@@ -29,7 +29,7 @@ public class CommentService {
         Long userId = (Long) request.getSession().getAttribute("userId");
         Optional<User> user = userService.findById(userId);
         java.util.Date today = new java.util.Date();
-        Place place = null;
+        Place place;
         try {
              place = placeRepository.findById(placeId).get();
         } catch(Exception e) {
