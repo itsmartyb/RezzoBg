@@ -87,22 +87,19 @@ public class RestaurantService extends PlaceService {
         restaurant.setKitchens(getAndSaveCharacteristics(placeDTO));
         restaurant.setExtras(getAndSaveExtras(placeDTO));
         Restaurant r = this.restaurantRepository.save(restaurant);
-        List<Photo> photos = getPhotos(placeDTO, r);
+        List<Photo> photos = getAndSavePhotos(placeDTO, r);
     }
 
     @Transactional
     public void deleteRestaurant(Long restaurantId) throws InvalidRestaurantException {
         Optional<Restaurant> restaurant = this.restaurantRepository.findById(restaurantId);
-        Restaurant rest = null;
+        Restaurant rest;
         try {
               rest = restaurant.get();
         } catch (Exception e) {
             throw new InvalidRestaurantException("Such restaurant does not exist!");
         }
-        this.commentRepository.removeByPlaceId(rest.getId());
-        this.addressRepository.removeById(rest.getAddress().getId());
-        this.photoRepository.deleteById(rest.getId());
+        deletePlaceRelationsFromDB(rest);
         this.restaurantRepository.delete(rest);
-
     }
 }

@@ -13,7 +13,7 @@ public class UserStory {
         return request.getSession().getAttribute("userId") != null;
     }
 
-    public static  boolean isAdminLogged(HttpServletRequest request) {
-        return request.getSession().getAttribute("isAdmin").equals(true);
+    public static boolean isAdminLogged(HttpServletRequest request) {
+        return request.getSession().getAttribute("isAdmin").equals(true) && isUserLogged(request);
     }
 }

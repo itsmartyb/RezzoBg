@@ -52,10 +52,15 @@ public class RestaurantController {
 
     @DeleteMapping("/restaurants/{restaurantId}")
     public void deleteRestaurant(@PathVariable Long restaurantId, HttpServletRequest request) throws
-            InvalidUserException, InvalidRestaurantException {
-        if(UserStory.isUserLogged(request) && UserStory.isAdminLogged(request)) {
-            this.restaurantService.deleteRestaurant(restaurantId);
+            InvalidUserException, InvalidRestaurantException, UserIsLoggedInException {
+        if (UserStory.isUserLogged(request)) {
+            if (UserStory.isAdminLogged(request)) {
+                this.restaurantService.deleteRestaurant(restaurantId);
+            } else {
+                throw new InvalidUserException("User does not have rights for this operation!");
+            }
+        } else {
+            throw new UserIsLoggedInException("There is no such user!");
         }
-        throw new InvalidUserException("Admin should log in!");
     }
 }

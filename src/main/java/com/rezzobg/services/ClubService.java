@@ -3,6 +3,7 @@ package com.rezzobg.services;
 import com.rezzobg.dto.PlaceDTO;
 import com.rezzobg.dto.PlaceDtoForList;
 import com.rezzobg.exceptions.InvalidClubException;
+import com.rezzobg.exceptions.InvalidRestaurantException;
 import com.rezzobg.models.*;
 import com.rezzobg.repositories.ClubRepository;
 import com.rezzobg.repositories.GenreRepository;
@@ -10,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -82,6 +84,19 @@ public class ClubService extends PlaceService{
         club.setGenres(getAndSaveCharacteristics(placeDTO));
         club.setExtras(getAndSaveExtras(placeDTO));
         Club c = this.clubRepository.save(club);
-        List<Photo> photos = getPhotos(placeDTO, c);
+        List<Photo> photos = getAndSavePhotos(placeDTO, c);
+    }
+
+    @Transactional
+    public void deleteClub(Long restaurantId) throws InvalidRestaurantException {
+        Optional<Club> club = this.clubRepository.findById(restaurantId);
+        Club c;
+        try {
+            c = club.get();
+        } catch (Exception e) {
+            throw new InvalidRestaurantException("Such restaurant does not exist!");
+        }
+        deletePlaceRelationsFromDB(c);
+        this.clubRepository.delete(c);
     }
 }

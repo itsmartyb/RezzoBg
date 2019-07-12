@@ -11,10 +11,11 @@ import com.rezzobg.services.ClubService;
 import com.rezzobg.services.UserStory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+
+
 @RestController
 public class ClubController {
 
@@ -39,10 +40,23 @@ public class ClubController {
     @PostMapping("/clubs")
     public void addClub(@Valid @RequestBody PlaceDTO placeDTO, HttpServletRequest request) throws
             InvalidUserException, UserIsLoggedInException{
-        this.clubService.addClub(placeDTO);
         if (UserStory.isUserLogged(request)) {
             if (UserStory.isAdminLogged(request)) {
                 this.clubService.addClub(placeDTO);
+            } else {
+                throw new InvalidUserException("The user does not have rights for this operation!");
+            }
+        } else {
+            throw new UserIsLoggedInException("User is not logged in!");
+        }
+    }
+
+    @DeleteMapping("clubs/{clubId}")
+    public void deleteClub(@PathVariable Long clubId, HttpServletRequest request) throws
+            InvalidUserException, InvalidRestaurantException, UserIsLoggedInException {
+        if (UserStory.isUserLogged(request)) {
+            if (UserStory.isAdminLogged(request)) {
+                this.clubService.deleteClub(clubId);
             } else {
                 throw new InvalidUserException("The user does not have rights for this operation!");
             }
