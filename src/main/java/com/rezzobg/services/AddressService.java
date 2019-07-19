@@ -17,9 +17,11 @@ public class AddressService {
     private CityService cityService;
 
     public Address getAndSaveAddress(AddressDTO addressDTO) {
-        Address address = new Address(null, addressDTO.getStreet(), addressDTO.getArea(),
-                cityService.getAndSaveCity(addressDTO.getCity()), addressDTO.getCountry());
-        this.addressRepository.save(address);
-        return address;
+       return this.addressRepository.save(new Address(null, addressDTO.getStreet(), addressDTO.getArea(),
+                cityService.getAndSaveCity(addressDTO.getCity()), addressDTO.getCountry()));
+    }
+
+    public CityService getCityService() {
+        return this.cityService;
     }
 }
